@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مرحبا أنا شادي 😎</title>
+<title> مرحبا أنا شادي 😎</title>
 
 <style>
 body{
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+    margin:0;
     height:100vh;
+    overflow:hidden;
     display:flex;
     justify-content:center;
     align-items:center;
-    margin:0;
-    overflow:hidden;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    font-family:Arial,sans-serif;
 }
 
 .container{
@@ -22,17 +22,18 @@ body{
 }
 
 h1{
-    color:#fff;
-    margin-bottom:40px;
+    color:white;
+    margin-bottom:30px;
+    padding:0 20px;
 }
 
 button{
-    font-size:22px;
-    padding:15px 35px;
     border:none;
     border-radius:12px;
+    padding:15px 30px;
+    font-size:22px;
     cursor:pointer;
-    margin:10px;
+    transition:0.2s;
 }
 
 #yes{
@@ -43,7 +44,7 @@ button{
 #no{
     background:#f44336;
     color:white;
-    position:absolute;
+    position:fixed;
 }
 
 #success{
@@ -51,44 +52,58 @@ button{
     background:white;
     padding:30px;
     border-radius:15px;
+    max-width:350px;
 }
 </style>
 </head>
-
 <body>
 
 <div class="container" id="question">
-    <h1>بدك نطلع مشوار او رح تبقي تفكري ؟🫪</h1>
+    <h1>راح نروح مشوار لو لا يا معودة 😡</h1>
 
-    <button id="yes">نعم 😊</button>
-    <button id="no">لا 😡</button>
+    <button id="yes">نعم 😍</button>
+    <button id="no">لا 🫪</button>
 </div>
 
 <div id="success">
-    <h2>رائع! 🎉</h2>
-    <p>اخترِي الموعد المناسب:</p>
+    <h2>🎉 رائع!</h2>
+    <p>اختاري الموعد المناسب:</p>
 
     <input type="date"><br><br>
     <input type="time"><br><br>
 
-    <button onclick="finish()">إرسال</button>
+    <button onclick="finish()">دزي يابه</button>
 
     <div id="done"></div>
 </div>
 
 <script>
 const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
 
-function moveButton(){
-    const maxX = window.innerWidth - 120;
-    const maxY = window.innerHeight - 70;
+let yesSize = 1;
+
+function moveNoButton() {
+    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
 
     noBtn.style.left = Math.random() * maxX + "px";
     noBtn.style.top = Math.random() * maxY + "px";
+
+    yesSize += 0.15;
+    yesBtn.style.transform = `scale(${yesSize})`;
 }
 
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("click", moveButton);
+noBtn.addEventListener("mouseenter", moveNoButton);
+noBtn.addEventListener("click", e => {
+    e.preventDefault();
+    moveNoButton();
+});
+
+noBtn.addEventListener("touchstart", e => {
+    e.preventDefault();
+    moveNoButton();
+});
 
 document.getElementById("yes").addEventListener("click", () => {
     document.getElementById("question").style.display = "none";
@@ -97,7 +112,7 @@ document.getElementById("yes").addEventListener("click", () => {
 
 function finish(){
     document.getElementById("done").innerHTML =
-        "<h3>تم إرسال الموافقة بنجاح ❤️</h3>";
+    "<h3>❤️ تم تسجيل الموعد بنجاح ❤️</h3>";
 }
 </script>
 
